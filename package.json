@@ -1,0 +1,39 @@
+{
+  "name": "gamiflow",
+  "version": "1.0.0",
+  "description": "gamification engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbhamilton/gamiflow.git"
+  },
+  "keywords": [
+    "gamification"
+  ],
+  "author": "BB",
+  "license": "ISC",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/bbhamilton/gamiflow/issues"
+  },
+  "homepage": "https://github.com/bbhamilton/gamiflow#readme",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "express": "^4.14.0",
+    "express-validator": "*",
+    "mongodb": "^2.2.16",
+    "mongoose": "^4.7.4",
+    "passport": "^0.3.2",
+    "passport-local": "*",
+    "passport-http": "*",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.5",
+    "gulp-nodemon": "^2.2.1"
+  }
+}
