@@ -23,13 +23,14 @@
   "dependencies": {
     "bcryptjs": "*",
     "body-parser": "*",
+    "cookie-parser": "*",
     "express": "^4.14.0",
     "express-validator": "*",
     "mongodb": "^2.2.16",
     "mongoose": "^4.7.4",
     "passport": "^0.3.2",
-    "passport-local": "*",
     "passport-http": "*",
+    "passport-local": "*",
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {
