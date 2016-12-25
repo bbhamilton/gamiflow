@@ -2,6 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('flash');
+const session = require('express-session');
+
 
 // database
 const mongo = require('mongodb');
@@ -14,6 +18,19 @@ const users = require('./routes/users');
 
 // express
 const app = express();
+
+// body parser basic config
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
+
+// flash, cookies, sessions basic config
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 // passport init
 app.use(passport.initialize());
@@ -33,9 +50,6 @@ app.use('/', routes);
 //   res.status(404).send('Sorry cant find that!');
 // });
 
-// body parser basic config
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve files from public/
 app.use(express.static(__dirname + '/public'));

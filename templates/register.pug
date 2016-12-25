@@ -1,7 +1,36 @@
 extends layout.pug
 
 block title
-  title register
+  title Gamiflow - registration
 
 block content
-  h1 register
+  .jumbotron
+    .container
+      h1.display-3 Registration
+  .container
+    .row
+      if errors
+        each error in errors
+          .alert.alert-warning(role='alert')
+            strong Error!
+            |  #{error.msg}
+
+    .row
+      form(method='post', action='/register')
+        .form-group
+          label(for='registerFormUsername') Username
+          input#registerFormUsername.form-control(type='text', placeholder='Enter username', name='username')
+        .form-group
+          label(for='registerFormEmail') Email address
+          input#registerFormEmail.form-control(type='email', placeholder='Enter email', name='email')
+        .form-group
+          label(for='registerFormPassword1') Password
+          input#registerFormPassword1.form-control(type='password', placeholder='Password', name='password1')
+        .form-group
+          label(for='registerFormPassword2') Retype password
+          input#registerFormPassword2.form-control(type='password', placeholder='Password', name='password2')
+        .form-check
+          label.form-check-label
+            input.form-check-input(type='checkbox')
+            |  Terms and regulations
+        button.btn.btn-primary(type='submit') Submit
