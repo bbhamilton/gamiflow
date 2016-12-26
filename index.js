@@ -14,7 +14,6 @@ mongoose.connect('mongodb://localhost/gamiflow');
 
 // routing
 const routes = require('./routes/index');
-const users = require('./routes/users');
 
 // express
 const app = express();

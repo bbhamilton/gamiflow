@@ -2,7 +2,39 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user.js');
+const User = require('../models/user');
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+
+    User.getUserByUsername(username, (err, user) => {
+      if(err) throw err;
+      if(!user) {
+        return done(null, false, {message: 'Unknown user'});
+      }
+
+      User.comparePassword(password, user.password, (err, isMatch) => {
+        if(err) throw err;
+        if(isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false, {message: 'Invalid password'});
+        }
+      });
+
+    });
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.getUserById(id, (err, user) => {
+    done(null, user);
+  });
+});
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -39,10 +71,9 @@ router.post('/register', (req, res) => {
 
     User.createUser(newUser, (err, user) => {
       if(err) throw err;
-      console.log(user);
     });
 
-    req.flash('success', 'You are signed up. Please log in.');
+    req.flash('success_msg', 'You are signed up. Please log in.');
     res.redirect('/');
   }
 
@@ -57,10 +88,19 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/users',
-    failureRedirect: '/login'
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
   }), (req, res) => {
     res.redirect('/');
+});
+
+router.get('/logout', function(req, res){
+	req.logout();
+
+	req.flash('success_msg', 'You are logged out');
+
+	res.redirect('/users/login');
 });
 
 module.exports = router;
