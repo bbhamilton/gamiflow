@@ -7,23 +7,54 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(http-equiv='x-ua-compatible', content='ie=edge')
     link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/custom.css', rel='stylesheet')
   body
-    nav.navbar.navbar-static-top.navbar-dark.bg-inverse
-      a.navbar-brand(href='#') Gamiflow
+    nav.navbar.navbar-static-top.navbar-dark.bg-inverse(style='border-radius:0')
+      a.navbar-brand(href='/') Gamiflow
       ul.nav.navbar-nav
-        li.nav-item.active
-          a.nav-link(href='/')
-            | Index
-            span.sr-only (current)
-        li.nav-item
-          a.nav-link(href='/login') Login
         li.nav-item
           a.nav-link(href='/games') Games
-        li.nav-item
-          a.nav-link(href='/register') Register
+        if !user
+          li.nav-item.float-xs-right
+            ul
+              li.nav-item
+                a.nav-link(href='/login') Login
+              li.nav-item
+                a.nav-link(href='/register') Register
+        else
+          li.nav-item.dropdown.float-xs-right
+            a#supportedContentDropdown.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') hello, #{user.username}!
+            .dropdown-menu(aria-labelledby='supportedContentDropdown')
+              a.dropdown-item(href='/profile') Your profile
+              a.dropdown-item(href='/notifications') Notifications
+              if user.isAdmin
+                a.dropdown-item(href='/admin') Admin panel
+              a.dropdown-item(href='/logout') Logout
+          li.nav-item.float-xs-right
+            a.btn-success.nav-link(href='/create-game') Create a game
 
-    while message = flash.shift()
-      =message
+
+
+    if success_flash.length > 0
+        .alert.alert-success(role='alert')
+          strong Well done!
+          |  #{ success_flash }
+
+    if info_flash.length > 0
+        .alert.alert-info(role='alert')
+          strong Heads up!
+          |  #{ info_flash }
+
+    if error_flash.length > 0
+        .alert.alert-error(role='alert')
+          strong Oh snap!
+          |  #{ error_flash }
+
+    if warning_flash.length > 0
+        .alert.alert-warning(role='alert')
+          strong Hmmm...
+          |  #{ warning_flash }
+
     block content
     footer
       p © Gamiflow 2016

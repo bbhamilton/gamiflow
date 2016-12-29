@@ -1,0 +1,52 @@
+extends layout.pug
+
+block title
+  title Gamiflow - create a game
+
+block content
+  .jumbotron
+    .container
+      h1.display-3 Create a game
+  .container
+    .row
+      if errors
+        each error in errors
+          .alert.alert-warning(role='alert')
+            strong Error!
+            |  #{error.msg}
+
+    .row
+      form(method='post', action='/create-game')
+        .form-group
+          label(for='createGameFormName') Name
+          input#createGameFormUsername.form-control(type='text', placeholder='Enter username', name='username')
+        .form-group
+          label(for='basic-url') Your vanity URL
+          .input-group
+            span#basic-addon3.input-group-addon https://gamiflow.io/games/
+            input#basic-url.form-control(type='text', aria-describedby='basic-addon3')
+        .form-group
+          label(for='createGameFormEmail') Description
+          textarea#createGameFormEmail.form-control(placeholder='Short description', name='email')
+        .form-group
+          label(for='createGameFormEmail') Category
+          .input-group
+            select.custom-select
+              option(selected='') Choose one
+              option(value='1') Company
+              option(value='2') Culture
+              option(value='3') Education
+              option(value='4') Other
+        .form-check
+          label.form-check-label
+            input.form-check-input(type='checkbox')
+            |  Terms and regulations
+        button.btn.btn-primary(type='submit') Submit
+  pre
+    p TODO
+    ul
+      li przemyśleć kategorie
+      li ikonki do kategorii
+      li autmatyczne tworzenie vanity url
+      li walidacja w bazie vanity url
+      li zapis gry w bazie
