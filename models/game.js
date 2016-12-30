@@ -1,52 +1,50 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 const GameSchema = mongoose.Schema({
-  username: {
+  name: {
     type: String,
     index: true
   },
-  name: {
+  // author: {
+  //   type: Types.Relationship,
+  //   ref: 'User',
+  //   index: true
+  // },
+  vanityUrl: {
     type: String,
   },
-  email: {
+  description: {
     type: String
   },
-  password: {
-    type: String
+  category: {
+    type: Number
   },
-  isAdmin: {
+  createdDate: {
+    type: Date,
+    default: Date.now
+  },
+  author: {
     type: Boolean,
     default: false
+  },
+  private: {
+    type: Boolean,
+    default: true
   }
 });
 
-const User = mongoose.model('User', UserSchema);
+const Game = mongoose.model('Game', GameSchema);
 
-module.exports = User;
+module.exports = Game;
 
-module.exports.createUser = (newUser, callback) => {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        newUser.password = hash;
-        newUser.save(callback);
-      });
-    });
+module.exports.createGame = (newGame, callback) => {
+  newGame.save(callback);
 }
 
-module.exports.getUserByUsername = (username, callback) => {
-  User.findOne({username: username}, callback);
-
+module.exports.getGames = (callback) => {
+  Game.find({}, callback);
 }
 
-module.exports.comparePassword = (candidatePassword, hash, callback) => {
-  bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
-    if(err) throw err;
-    callback(null, isMatch);
-  });
-
-}
-
-module.exports.getUserById = (id, callback) => {
-  User.findById(id, callback);
+module.exports.getGameDetails = (vanityUrl, callback) => {
+  Game.findOne({vanityUrl: vanityUrl}, callback);
 }

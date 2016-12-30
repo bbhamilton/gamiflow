@@ -2,6 +2,7 @@ var app = require('../index');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
+const Game = require('../models/game');
 var router = app.router;
 
 passport.use(new LocalStrategy(
@@ -46,6 +47,55 @@ router.get('/create-game', (req, res) => {
   res.render('create-game');
 });
 
+router.post('/create-game', (req, res) => {
+  let name = req.body.name;
+  let vanityUrl = req.body.vanityUrl;
+  let description = req.body.description;
+  let category = req.body.category;
+
+  req.checkBody('name', 'Name is required.').notEmpty();
+  req.checkBody('vanityUrl', 'Vanity url is required.').notEmpty();
+  req.checkBody('description', 'Description is required.').notEmpty();
+  req.checkBody('category', 'Category is required.').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if(errors) {
+    res.render('create-game', {
+      errors: errors
+    });
+  } else {
+
+    console.log({
+      name: name,
+      vanityUrl: vanityUrl,
+      description: description,
+      category: category
+    });
+
+    let newGame = new Game({
+      name: name,
+      vanityUrl: vanityUrl,
+      category: category,
+      description: description
+    });
+
+    Game.createGame(newGame, (err, game) => {
+      if(err) throw err;
+    });
+
+    req.flash('success', 'You\'ve created new game successfully!');
+    res.redirect('/create-game');
+  }
+});
+
+router.get('/games/:vanityUrl', function (req, res) {
+  Game.getGameDetails(req.params.vanityUrl, (err, game) => {
+    res.locals.game = game;
+    res.render('game-details');
+  });
+})
+
 router.get('/register', (req, res) => {
   console.log('/register');
   res.render('register');
@@ -81,14 +131,18 @@ router.post('/register', (req, res) => {
     });
 
     req.flash('success', 'You are signed up. Please log in.');
-    res.redirect('/');
+    res.redirect('/login');
   }
 
 });
 
 router.get('/games', (req, res) => {
-  console.log('/games');
-  res.render('games');
+  Game.getGames((err, games) => {
+    if(err) throw err;
+    res.locals.games = games;
+    res.render('games');
+
+  });
 });
 
 router.get('/profile', (req, res) => {

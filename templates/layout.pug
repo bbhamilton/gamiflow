@@ -22,6 +22,8 @@ html
               li.nav-item
                 a.nav-link(href='/register') Register
         else
+          li.nav-item.float-xs-right
+            a.btn-success.nav-link(href='/create-game') Create a game
           li.nav-item.dropdown.float-xs-right
             a#supportedContentDropdown.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') hello, #{user.username}!
             .dropdown-menu(aria-labelledby='supportedContentDropdown')
@@ -30,8 +32,6 @@ html
               if user.isAdmin
                 a.dropdown-item(href='/admin') Admin panel
               a.dropdown-item(href='/logout') Logout
-          li.nav-item.float-xs-right
-            a.btn-success.nav-link(href='/create-game') Create a game
 
 
 

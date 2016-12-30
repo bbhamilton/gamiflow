@@ -19,19 +19,19 @@ block content
       form(method='post', action='/create-game')
         .form-group
           label(for='createGameFormName') Name
-          input#createGameFormUsername.form-control(type='text', placeholder='Enter username', name='username')
+          input#createGameFormUsername.form-control(type='text', placeholder='Enter game name', name='name')
         .form-group
           label(for='basic-url') Your vanity URL
           .input-group
             span#basic-addon3.input-group-addon https://gamiflow.io/games/
-            input#basic-url.form-control(type='text', aria-describedby='basic-addon3')
+            input#basic-url.form-control(type='text', aria-describedby='basic-addon3', name='vanityUrl')
         .form-group
           label(for='createGameFormEmail') Description
-          textarea#createGameFormEmail.form-control(placeholder='Short description', name='email')
+          textarea#createGameFormEmail.form-control(placeholder='Short description', name='description')
         .form-group
           label(for='createGameFormEmail') Category
           .input-group
-            select.custom-select
+            select.custom-select(name='category')
               option(selected='') Choose one
               option(value='1') Company
               option(value='2') Culture

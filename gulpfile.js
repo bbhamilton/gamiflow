@@ -9,8 +9,8 @@ gulp.task('default', ['browser-sync'], function () {
 gulp.task('browser-sync', ['nodemon'], function() {
 	browserSync.init(null, {
 		proxy: "http://localhost:7777",
-        files: ["templates/**/*.*", "public/**/*.*"],
-        browser: "google chrome"
+    files: ["templates/**/*.*", "public/**/*.*"],
+    browser: "google chrome"
 	});
 });
 gulp.task('nodemon', function (cb) {
