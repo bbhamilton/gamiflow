@@ -1,0 +1,240 @@
+doctype html
+html(lang='en')
+  head
+    base(href='http://localhost:3000/')
+    meta(charset='utf-8')
+    block title
+      title Gamiflow - gamification engine
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.', name='description')
+    meta(content='Coderthemes', name='author')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    link(rel='shortcut icon', href='admin/images/favicon.ico')
+    // Plugins
+    link(rel='stylesheet', href='admin/plugins/switchery/switchery.min.css')
+    // Morris Chart CSS
+    link(rel='stylesheet', href='admin/plugins/morris/morris.css')
+    // Bootstrap core CSS
+    link(href='admin/css/bootstrap.min.css', rel='stylesheet')
+    // MetisMenu CSS
+    link(href='admin/css/metisMenu.min.css', rel='stylesheet')
+    // Icons CSS
+    link(href='admin/css/icons.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='admin/css/style.css', rel='stylesheet')
+  body
+    // Top Bar Start
+    .topbar
+      // LOGO
+      .topbar-left
+        div
+          a.logo(href='/')
+            | Gamiflow
+      // Top navbar
+      .navbar.navbar-default(role='navigation')
+        .container
+          div
+            // Mobile menu button
+            .pull-left
+              button.button-menu-mobile.visible-xs.visible-sm(type='button')
+                i.fa.fa-bars
+              span.clearfix
+            // Top nav left menu
+            ul.nav.navbar-nav.hidden-sm.hidden-xs.top-navbar-items
+              li
+                a(href='#') About
+              li
+                a(href='#') Help
+              li
+                a(href='#') Contact
+            // Top nav Right menu
+            ul.nav.navbar-nav.navbar-right.top-navbar-items-right.pull-right
+              li.hidden-xs
+                form.navbar-left.app-search.pull-left(role='search')
+                  input.form-control(type='text', placeholder='Search...')
+                  a(href='')
+                    i.fa.fa-search
+              li.dropdown.top-menu-item-xs
+                a.dropdown-toggle.menu-right-item(href='#', data-target='#', data-toggle='dropdown', aria-expanded='true')
+                  i.mdi.mdi-bell
+                  span.label.label-danger 3
+                ul.dropdown-menu.p-0.dropdown-menu-lg
+                  // <li class="notifi-title"><span class="label label-default pull-right">New 3</span>Notification</li>
+                  li.list-group.notification-list(style='height: 267px;')
+                    .slimscroll
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-diamond.bg-primary
+                          .media-body
+                            h5.media-heading A new order has been placed A new order has been placed
+                            p.m-0
+                              small There are new settings available
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-cog.bg-warning
+                          .media-body
+                            h5.media-heading New settings
+                            p.m-0
+                              small There are new settings available
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-bell-o.bg-custom
+                          .media-body
+                            h5.media-heading Updates
+                            p.m-0
+                              small
+                                | There are
+                                span.text-primary.font-600 2
+                                |  new updates available
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-user-plus.bg-danger
+                          .media-body
+                            h5.media-heading New user registered
+                            p.m-0
+                              small You have 10 unread messages
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-diamond.bg-primary
+                          .media-body
+                            h5.media-heading A new order has been placed A new order has been placed
+                            p.m-0
+                              small There are new settings available
+                      // list item
+                      a.list-group-item(href='javascript:void(0);')
+                        .media
+                          .media-left.p-r-10
+                            em.fa.fa-cog.bg-warning
+                          .media-body
+                            h5.media-heading New settings
+                            p.m-0
+                              small There are new settings available
+                  // <li>
+                  // <a href="javascript:void(0);" class="list-group-item text-right">
+                  // <small class="font-600">See all notifications</small>
+                  // </a>
+                  // </li>
+              li.dropdown.top-menu-item-xs
+                a.dropdown-toggle.menu-right-item.profile(href='', data-toggle='dropdown', aria-expanded='true')
+                  img.img-circle(src='admin/images/users/avatar-1.jpg', alt='user-img')
+                ul.dropdown-menu
+                  li
+                    a(href='javascript:void(0)')
+                      i.ti-user.m-r-10
+                      |  Profile
+                  li
+                    a(href='javascript:void(0)')
+                      i.ti-settings.m-r-10
+                      |  Settings
+                  li.divider
+                  li
+                    a(href='/logout')
+                      i.ti-power-off.m-r-10
+                      |  Logout
+        // end container
+      // end navbar
+    // Top Bar End
+    // Page content start
+    .page-contentbar
+      // left navigation start
+      aside.sidebar-navigation
+        .scrollbar-wrapper
+          div
+            button.button-menu-mobile.btn-mobile-view.visible-xs.visible-sm(type='button')
+              i.mdi.mdi-close
+            // User Detail box
+            .user-details
+              .pull-left
+                img.thumb-md.img-circle(src='admin/images/users/avatar-1.jpg', alt='')
+              .user-info
+                a(href='#')
+                  if user
+                    | #{user.username}
+                p.text-muted.m-0 Administrator
+            // - End User Detail box
+            // Left Menu Start
+            ul#side-menu.metisMenu.nav
+              li
+                a(href='admin/')
+                  i.ti-home
+                  |  Dashboard
+              li.divider
+                hr
+              li
+                a(href='admin/users')
+                  i.ti-light-bulb
+                  | Users
+              li
+                a(href='admin/user-levels')
+                  i.ti-light-bulb
+                  | User levels
+              li
+                a(href='admin/games')
+                  i.ti-light-bulb
+                  | Games
+              li
+                a(href='admin/challenges')
+                  i.ti-light-bulb
+                  | Challenges
+              li
+                a(href='admin/challenge-types')
+                  i.ti-light-bulb
+                  | Challenge types
+              li
+                a(href='admin/badges')
+                  i.ti-light-bulb
+                  | Badges
+              li
+                a(href='admin/logs')
+                  i.ti-light-bulb
+                  | Logs
+              li
+                a(href='admin/log-types')
+                  i.ti-light-bulb
+                  | Log types
+              li.divider
+                hr
+              li
+                a(href='typography.html')
+                  i.ti-spray
+                  |  Settings
+      // left navigation end
+      // START PAGE CONTENT
+      #page-right-content
+        block content
+        .footer
+          .pull-right.hidden-xs
+            | Project Completed
+            strong.text-custom 39%
+            | .
+          div
+            strong Simple Admin
+            |  - Copyright © 2016
+          // end footer
+        // End #page-right-content
+      // end .page-contentbar
+    // End #page-wrapper
+    // js placed at the end of the document so the pages load faster
+    script(src='admin/js/jquery-2.1.4.min.js')
+    script(src='admin/js/bootstrap.min.js')
+    script(src='admin/js/metisMenu.min.js')
+    script(src='admin/js/jquery.slimscroll.min.js')
+    // Morris Chart
+    script(src='admin/plugins/morris/morris.min.js')
+    script(src='admin/plugins/raphael/raphael-min.js')
+    // Dashboard init
+    script(src='admin/pages/jquery.dashboard.js')
+    // Plugins
+    script(src='admin/plugins/switchery/switchery.min.js')
+    // App Js
+    script(src='admin/js/jquery.app.js')

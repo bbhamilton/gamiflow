@@ -7,7 +7,12 @@ block content
   .jumbotron
     .container
       h1.display-3 #{game.name}
-  .container
+        span#follow.btn-header.float-xs-right
+          a.btn-info.nav-link(href='#') Follow
+        span#join.btn-header.float-xs-right
+          a.btn-success.nav-link(href='') Join game
+
+  .container#game_details_page
     .row
       // Nav tabs
       ul.nav.nav-tabs(role='tablist')
@@ -16,16 +21,257 @@ block content
         li.nav-item
           a.nav-link(data-toggle='tab', href='#badges', role='tab') Badges
         li.nav-item
+          a.nav-link(data-toggle='tab', href='#challenges', role='tab') Challenges
+        li.nav-item
           a.nav-link(data-toggle='tab', href='#userLevels', role='tab') Levels
         li.nav-item
-          a.nav-link(data-toggle='tab', href='#stream', role='tab') Stream
+          a.nav-link(data-toggle='tab', href='#updates', role='tab') Updates
+        li.nav-item
+          a.nav-link(data-toggle='tab', href='#leaderboard', role='tab') Leaderboard
       // Tab panes
       .tab-content
         #basicInfo.tab-pane.active(role='tabpanel')
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          iframe(width='560', height='315', style='float: left; padding-right: 20px;', src='https://www.youtube.com/embed/1A_CAkYt3GY', frameborder='0', allowfullscreen='')
+          h3 What is game about?
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          h3 Who is game for?
+          p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         #badges.tab-pane(role='tabpanel')
-          p sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .card-columns
+            .card
+              img.card-img-top.img-fluid(src='../../images/CampCounselor.png', alt='Card image cap')
+              .card-block
+                h4.card-title Camp Counselor
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/CampFireStories.png', alt='Card image cap')
+              .card-block
+                h4.card-title Camp Fire Stories
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/FirstAid.png', alt='Card image cap')
+              .card-block
+                h4.card-title First Aid
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/GoFishing.png', alt='Card image cap')
+              .card-block
+                h4.card-title Go Fishing
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/Hiking.png', alt='Card image cap')
+              .card-block
+                h4.card-title Hiking
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/Search.png', alt='Card image cap')
+              .card-block
+                h4.card-title Search
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/Sleep.png', alt='Card image cap')
+              .card-block
+                h4.card-title Sleep
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/TalentShow.png', alt='Card image cap')
+              .card-block
+                h4.card-title Talent Show
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .card
+              img.card-img-top.img-fluid(src='../../images/WriteHome.png', alt='Card image cap')
+              .card-block
+                h4.card-title Write Home
+                p.card-text
+                  | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        #challenges.tab-pane(role='tabpanel')
+          table.table.table-striped
+            thead
+              tr
+                th Badge
+                th Name
+                th Description
+                th Points
+            tbody
+              tr(data-toggle='modal', data-target='#myModal')
+                th(scope='row')
+                  img(src='../../images/CampCounselor.png', width='50px')
+                td Camp Counselor
+                td Badge for all players
+                td 11
+              tr
+                th(scope='row')
+                  img(src='../../images/CampFireStories.png', width='50px')
+                td Camp Fire Stories
+                td Only for camp challenge
+                td 49
+              tr
+                th(scope='row')
+                  img(src='../../images/FirstAid.png', width='50px')
+                td First Aid
+                td Secret badge
+                td 52
+              tr
+                th(scope='row')
+                  img(src='../../images/GoFishing.png', width='50px')
+                td Go Fishing
+                td go fishing to achieve it
+                td 12
+              tr
+                th(scope='row')
+                  img(src='../../images/Hiking.png', width='50px')
+                td Hiking
+                td go fishing to achieve it
+                td 76
+              tr
+                th(scope='row')
+                  img(src='../../images/Search.png', width='50px')
+                td Search
+                td go fishing to achieve it
+                td 11
+              tr
+                th(scope='row')
+                  img(src='../../images/Sleep.png', width='50px')
+                td Sleep
+                td go fishing to achieve it
+                td 100
+              tr
+                th(scope='row')
+                  img(src='../../images/TalentShow.png', width='50px')
+                td Talent Show
+                td go fishing to achieve it
+                td 40
+              tr
+                th(scope='row')
+                  img(src='../../images/WriteHome.png', width='50px')
+                td Write Home
+                td go fishing to achieve it
+                td 23
         #userLevels.tab-pane(role='tabpanel')
-          p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        #stream.tab-pane(role='tabpanel')
-          p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          table.table.table-striped
+            thead
+              tr
+                th #
+                th Name
+                th Description
+                th Players
+            tbody
+              tr
+                th(scope='row') 1
+                td Basic level
+                td Initial level for everyone
+                td
+                  span.tag.tag-default.tag-pill 21
+              tr
+                th(scope='row') 2
+                td Second level
+                td Whoopa - new actions and badges
+                td
+                  span.tag.tag-default.tag-pill 13
+              tr
+                th(scope='row') 3
+                td Third one
+                td New galaxy
+                td
+                  span.tag.tag-default.tag-pill 1
+              tr
+                th(scope='row') 4
+                td fantastic four
+                td New badges
+                td
+                  span.tag.tag-default.tag-pill 1
+              tr
+                th(scope='row') 5
+                td Fifth element
+                td 5x new actions
+                td
+                  span.tag.tag-default.tag-pill 5
+              tr
+                th(scope='row') 6
+                td Six
+                td Only for hard gamers
+                td
+                  span.tag.tag-default.tag-pill 2
+        #updates.tab-pane(role='tabpanel')
+          .blog-post
+            h2.blog-post-title First update
+            p.blog-post-meta
+              | December 29, 2013 by
+              a(href='#') Game admin
+            p
+              | There're some updates. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praise the Lord! We've just launched our game.
+            p
+              | Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          .blog-post
+            h2.blog-post-title Game launched!
+            p.blog-post-meta
+              | December 23, 2013 by
+              a(href='#') Game admin
+            p
+              | Praise the Lord! We've just launched our game. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        #leaderboard.tab-pane(role='tabpanel')
+          table.table.table-striped
+            thead
+              tr
+                th #
+                th Player
+                th Points
+                th Level
+                th Badges
+            tbody
+              tr
+                th(scope='row') 1
+                td
+                  a(href='../user/admin') admin
+                td 456
+                td 3
+                td
+                  img(src='../../images/CampCounselor.png', width='30px')
+                  img(src='../../images/WriteHome.png', width='30px')
+                  img(src='../../images/TalentShow.png', width='30px')
+              tr
+                th(scope='row') 2
+                  td
+                    a(href='../user/magda') magda
+                td 344
+                td 2
+                td
+                  img(src='../../images/Search.png', width='30px')
+                  img(src='../../images/Hiking.png', width='30px')
+              tr
+                th(scope='row') 3
+                  td
+                    a(href='../user/milosz') miłosz
+                td 341
+                td 2
+                td
+                  img(src='../../images/FirstAid.png', width='30px')
+                  img(src='../../images/CampCounselor.png', width='30px')
+                  img(src='../../images/WriteHome.png', width='30px')
+                  img(src='../../images/TalentShow.png', width='30px')
+
+        // Modal
+        #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') ×
+                h4#myModalLabel.modal-title
+                  img.card-img-top.img-fluid(src='../../images/CampCounselor.png', alt='Card image cap')
+                  | Camp Counselor
+              .modal-body
+                h6 How to earn this badge?
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                h6 Localisation
+                p Localisation of our game:
+                iframe(src='https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5826.850822716293!2d-73.99564544987105!3d40.71769657789491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1483141060499', width='100%', height='300px', frameborder='0', style='border:0')

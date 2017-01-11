@@ -6,6 +6,13 @@ const expressValidator = require('express-validator');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const path = require('path');
+
+
+// database
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/gamiflow');
 
 const app = express();
 const router = {
@@ -14,11 +21,6 @@ const router = {
 }
 
 module.exports = router;
-
-// database
-const mongo = require('mongodb');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/gamiflow');
 
 // routing
 const userRoutes = require('./routes/userRoutes');
@@ -40,6 +42,7 @@ app.use(session({
     resave: true,
     secret: 'gamiflow'
 }));
+
 app.use(flash());
 
 app.use(function (req, res, next) {

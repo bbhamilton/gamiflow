@@ -1,8 +1,12 @@
 var app = require('../index');
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+
 const User = require('../models/user');
 const Game = require('../models/game');
+
+const routerHelper = require('./routerHelper');
 var router = app.router;
 
 passport.use(new LocalStrategy(
@@ -52,6 +56,7 @@ router.post('/create-game', (req, res) => {
   let vanityUrl = req.body.vanityUrl;
   let description = req.body.description;
   let category = req.body.category;
+  let userId = app.locals.user._id;
 
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('vanityUrl', 'Vanity url is required.').notEmpty();
@@ -68,6 +73,7 @@ router.post('/create-game', (req, res) => {
 
     console.log({
       name: name,
+      author: userId,
       vanityUrl: vanityUrl,
       description: description,
       category: category
@@ -75,6 +81,7 @@ router.post('/create-game', (req, res) => {
 
     let newGame = new Game({
       name: name,
+      author: userId,
       vanityUrl: vanityUrl,
       category: category,
       description: description
@@ -89,7 +96,14 @@ router.post('/create-game', (req, res) => {
   }
 });
 
-router.get('/games/:vanityUrl', function (req, res) {
+router.get('/user/:username', function (req, res) {
+  User.getUserByUsername(req.params.username, (err, user) => {
+    res.locals.user = user;
+    res.render('user-public-profile');
+  });
+})
+
+router.get('/game/:vanityUrl', function (req, res) {
   Game.getGameDetails(req.params.vanityUrl, (err, game) => {
     res.locals.game = game;
     res.render('game-details');
@@ -145,7 +159,7 @@ router.get('/games', (req, res) => {
   });
 });
 
-router.get('/profile', (req, res) => {
+router.get('/profile', routerHelper.ensureAuthenticated, (req, res) => {
   console.log('/profile');
   app.locals.user = req.session.passport.user || null;
   if(app.locals.user) {
@@ -158,7 +172,10 @@ router.get('/profile', (req, res) => {
 
 router.get('/login', (req, res) => {
   console.log('/login');
+  app.locals.redirect = req.query.redirect || '/profile';
+  console.log('app.locals.redirect = ' + app.locals.redirect);
   res.render('login');
+  //fff
 });
 
 router.post('/login', passport.authenticate('local', {

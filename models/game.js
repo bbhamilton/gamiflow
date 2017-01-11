@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId,
+    User = Schema.User,
+    User = Schema.Challenge,
+    User = Schema.Badge,
+    User = Schema.UserLevel;
+
 const GameSchema = mongoose.Schema({
   name: {
     type: String,
     index: true
   },
-  // author: {
-  //   type: Types.Relationship,
-  //   ref: 'User',
-  //   index: true
-  // },
   vanityUrl: {
     type: String,
   },
@@ -23,9 +25,16 @@ const GameSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  badges: [{ type : ObjectId, ref: 'Badge' }],
+  challenges: [{ type : ObjectId, ref: 'Challenge' }],
+  userLevels: [{ type : ObjectId, ref: 'UserLevel' }],
   author: {
-    type: Boolean,
-    default: false
+    type: ObjectId,
+    ref: 'User'
+  },
+  users: {
+    players: [{ type : ObjectId, ref: 'User' }],
+    followers: [{ type : ObjectId, ref: 'User' }]
   },
   private: {
     type: Boolean,
@@ -42,7 +51,7 @@ module.exports.createGame = (newGame, callback) => {
 }
 
 module.exports.getGames = (callback) => {
-  Game.find({}, callback);
+  Game.find({}, callback).populate('author');
 }
 
 module.exports.getGameDetails = (vanityUrl, callback) => {

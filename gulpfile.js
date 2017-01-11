@@ -8,6 +8,7 @@ gulp.task('default', ['browser-sync'], function () {
 
 gulp.task('browser-sync', ['nodemon'], function() {
 	browserSync.init(null, {
+		notify: false,
 		proxy: "http://localhost:7777",
     files: ["templates/**/*.*", "public/**/*.*"],
     browser: "google chrome"

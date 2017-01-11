@@ -4,13 +4,17 @@ block title
   title Gamiflow - games
 
 block content
-  .jumbotron
+  .jumbotron.small-jumbotron
     .container
-      h1.display-3 Games
-  .container
+      h3 Games
+  .container#games_page
     .row
       p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       .row
+      if games.length <= 0
+        p There's no games in database. Be a first game author and
+          | 
+          a(href='/create-game') add one.
       each game in games
         .col-sm-4
           .card
@@ -21,12 +25,10 @@ block content
                 | #{game.description}
               p.card-text
                 small.text-muted #{game.createdDate}
-              a(href='games/' + game.vanityUrl, class='btn btn-primary') More details
+              a(href='game/' + game.vanityUrl, class='btn btn-primary') More details
 
   pre
     p TODO
     ul
-      li lista gier
-      li STRONA: widok szczegółowy
       li paginacja? / infinity scroll
       li szukarka / filtry (elasticsearch?)
