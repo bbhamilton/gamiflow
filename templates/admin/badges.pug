@@ -11,7 +11,7 @@ block content
         .card-box
           h4.m-t-0
             | Badges &nbsp;
-            a(href='admin/badge/add', class='btn btn-large btn-info') Add new badge
+            a(href='admin/add/badge/', class='btn btn-large btn-info') Add new badge
           .table-responsive
             table.table.table-hover.mails.m-0.table.table-actions-bar
               thead
@@ -37,6 +37,7 @@ block content
                   th Points
                   th Uploaded by
                   th Public
+                  th
               tbody
                 each badge in badges
                   tr
@@ -46,10 +47,10 @@ block content
                         label(for='checkbox2')
                       img.img-circle.thumb-sm(src='admin/images/users/avatar-2.jpg', alt='contact-img', title='contact-img')
                     td
-                      a(href='/admin/badge/edit/' + badge.name) #{badge.name}
+                      a(href='/admin/edit/badge/' + badge.name) #{badge.name}
                     td
                       if badge.game
-                        a(href='/admin/game/edit/' + badge.game.name) #{badge.game.name}
+                        a(href='/admin/edit/game/' + badge.game.name) #{badge.game.name}
                       else
                         | none
                     td #{badge.minPoints}
@@ -63,3 +64,5 @@ block content
                         input(type='checkbox', checked='', data-plugin='switchery', data-color='#64b0f2', data-size='small')
                       else
                         input(type='checkbox', data-plugin='switchery', data-color='#64b0f2', data-size='small')
+                    td
+                      a(href='/admin/remove/game/' + badge.name, class='btn btn-danger') Remove

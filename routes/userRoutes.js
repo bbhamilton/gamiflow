@@ -103,12 +103,12 @@ router.get('/user/:username', function (req, res) {
   });
 })
 
-router.get('/game/:vanityUrl', function (req, res) {
-  Game.getGameDetails(req.params.vanityUrl, (err, game) => {
-    res.locals.game = game;
-    res.render('game-details');
-  });
-})
+// router.get('/game/:vanityUrl', function (req, res) {
+//   Game.getGameDetails(req.params.vanityUrl, (err, game) => {
+//     res.locals.game = game;
+//     res.render('game-details');
+//   });
+// })
 
 router.get('/register', (req, res) => {
   console.log('/register');

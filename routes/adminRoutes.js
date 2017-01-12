@@ -68,6 +68,108 @@ router.get('/admin/badges', (req, res) => {
   });
 });
 
+router.get('/admin/add/:model', function (req, res) {
+
+  let model = req.params.model || null;
+
+  let template = null;
+
+  if(model === null) {
+    res.redirect('/404'); //TODO
+  }
+
+  switch(req.params.model) {
+    case 'badge':
+      template = 'badge-form';
+      break;
+    case 'challenge-type':
+      template = 'challenge-type-form';
+      break;
+    case 'challenge':
+      template = 'challenge-form';
+      break;
+    case 'game':
+      template = 'game-form';
+      break;
+    case 'log-type':
+      template = 'log-type-form';
+      break;
+    case 'log':
+      template = 'log-form';
+      break;
+    case 'user-level':
+      template = 'user-level-form';
+      break;
+    case 'user':
+      template = 'user-form';
+      break;
+    default:
+      res.redirect('/404');
+  }
+
+  if(template !== null) {
+    res.locals.object = '1';//todo
+    res.render(path.join(path.resolve("."), '/templates/admin/' + template));
+  }
+
+});
+
+router.get('/admin/edit/:model', function (req, res) {
+
+  let model = req.params.model || null;
+
+  let template = null;
+
+  if(model === null) {
+    res.redirect('/404'); //TODO
+  }
+
+  switch(req.params.model) {
+    case 'badge':
+      template = 'badge-form';
+      break;
+    case 'challenge-type':
+      template = 'challenge-type-form';
+      break;
+    case 'challenge':
+      template = 'challenge-form';
+      break;
+    case 'game':
+      template = 'game-form';
+      break;
+    case 'log-type':
+      template = 'log-type-form';
+      break;
+    case 'log':
+      template = 'log-form';
+      break;
+    case 'user-level':
+      template = 'user-level-form';
+      break;
+    case 'user':
+      template = 'user-form';
+      break;
+    default:
+      res.redirect('/404');
+  }
+
+  if(template !== null) {
+    res.locals.object = '1';//todo
+    res.render(path.join(path.resolve("."), '/templates/admin/' + template));
+  }
+
+});
+
+router.get('/admin/remove/:model', function (req, res) {
+  res.render(path.join(path.resolve("."), '/templates/admin/badge-form'));
+});
+
+router.get('/admin/edit/:model', function (req, res) {
+  res.render(path.join(path.resolve("."), '/templates/admin/badge-form'));
+})
+
+
+
 router.get('/admin/logs', (req, res) => {
   Log.getLogs((err, logs) => {
     if(err) throw err;
